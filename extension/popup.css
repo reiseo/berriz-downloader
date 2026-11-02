@@ -1,0 +1,29 @@
+body.popup{width:480px;height:580px;overflow-y:auto;font-size:13px}
+.popup main{padding:14px;max-width:none}
+.popup header{margin-bottom:12px;gap:10px}
+.popup .brand{width:34px;height:34px;border-radius:11px;font-size:21px}
+.popup .eyebrow{font-size:9px;letter-spacing:1px}
+.popup h1{font-size:17px;letter-spacing:-.4px}
+.popup .pill{font-size:10px;padding:4px 8px}
+.popup .card{padding:13px 15px;border-radius:12px;margin-bottom:10px}
+.popup h2{font-size:14px;margin-bottom:8px}
+.popup label{font-size:11px;margin:8px 0 5px}
+.popup input,.popup select,.popup textarea{font-size:12px;padding:7px 9px;min-width:0}
+.popup button{font-size:11px;padding:8px 11px}
+.popup .row{margin-top:10px;gap:6px}
+.popup .grid{grid-template-columns:1fr;gap:0}
+.popup .muted{font-size:11px;margin:7px 0}
+.popup details{margin-top:10px;padding-top:8px}
+.popup .captured{max-height:70px;font-size:10px}
+.popup .subtitle-list{grid-template-columns:1fr 1fr;gap:7px;margin:8px 0}
+.popup .subtitle-option{font-size:11px;padding:8px;gap:7px;margin:0}
+.popup .subtitle-option input{width:15px;height:15px}
+.popup .filepath{font-size:10px}
+.popup footer{font-size:10px;padding:3px}
+.metrics{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0}
+.metrics small{display:block;color:#77717d;font-size:10px;margin-bottom:4px}
+.metrics strong{display:block;font-size:14px;font-variant-numeric:tabular-nums;color:#30202b}
+.status-card .section-heading{align-items:center;gap:8px}
+.status-card #status{font-size:13px;margin:0}
+.status-card #percent{white-space:nowrap;font-variant-numeric:tabular-nums}
+.status-card progress{margin-top:10px}

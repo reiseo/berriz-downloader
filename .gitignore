@@ -1,0 +1,19 @@
+# Publish only the browser extension, release documentation and portable checks.
+/*
+!/.gitignore
+!/README.md
+!/RELEASE_NOTES.md
+!/VERIFICATION.md
+!/extension/
+!/docs/
+/docs/*
+!/docs/progress-preview.png
+!/tests/
+/tests/*
+!/tests/background.test.cjs
+!/tests/offscreen.test.cjs
+!/tests/media-core.test.cjs
+!/tests/replay-info.test.cjs
+!/tools/
+/tools/*
+!/tools/package-browser.ps1

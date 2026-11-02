@@ -1,0 +1,11 @@
+.subtitle-list{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:16px 0}
+.subtitle-option{display:flex;align-items:center;gap:11px;border:1px solid var(--line);border-radius:10px;padding:13px;margin:0;cursor:pointer;font-size:13px;background:#fcfafb}
+.subtitle-option:has(input:checked){border-color:#c83b6670;background:#fff6f9}
+.subtitle-option input{width:17px;height:17px;margin:0;accent-color:var(--accent)}
+.subtitle-option small{margin-left:auto;font-size:10px;color:var(--muted)}
+.subtitle-option .subtitle-format{flex-shrink:0;white-space:nowrap}
+.subtitle-option input{flex-shrink:0}
+[hidden]{display:none!important}
+#streamWarnings{font-size:12px;color:#a05e30;white-space:pre-wrap}
+#savedSubtitles div{padding:3px 0;word-break:break-all}
+@media(max-width:650px){.subtitle-list{grid-template-columns:1fr}}
