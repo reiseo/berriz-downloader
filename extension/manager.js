@@ -60,7 +60,7 @@ function saveForm() {
     selectedTab, signature: trackSignature, video: $('video').value, audio: $('audio').value,
     name: $('name').value, folder: $('folder').value, manual: $('manual').value,
     subtitleFormat: $('subtitleFormat').value, subtitleDefaultVersion: 1, subtitles: selectedSubtitles().map(track => track.url),
-    nameEdited, metadataEdited, metadataPageUrl, liveDate: $('liveDate').value, liveArtist: $('liveArtist').value, liveTitle: $('liveTitle').value
+    nameEdited, metadataEdited, metadataPageUrl, metadataExtractorVersion: 2, liveDate: $('liveDate').value, liveArtist: $('liveArtist').value, liveTitle: $('liveTitle').value
   } }).catch(showError);
 }
 
@@ -68,7 +68,7 @@ function restoreForm(form) {
   if (!form || form.selectedTab !== selectedTab) return;
   if (form.metadataPageUrl && form.metadataPageUrl !== metadataPageUrl) return;
   nameEdited = form.nameEdited === true;
-  metadataEdited = form.metadataEdited === true;
+  metadataEdited = form.metadataEdited === true && form.metadataExtractorVersion === 2;
   if (form.metadataPageUrl && form.metadataPageUrl === metadataPageUrl && metadataEdited) {
     for (const key of ['liveDate', 'liveArtist', 'liveTitle']) if (typeof form[key] === 'string') $(key).value = form[key];
   }
@@ -114,8 +114,9 @@ function applyGeneratedName() {
 async function refreshMetadata(tab) {
   if (!selectedTab) return;
   const stored = (await chrome.storage.session.get(`meta:${selectedTab}`))[`meta:${selectedTab}`];
-  let metadata = stored?.pageUrl === metadataPageUrl ? stored : null;
+  let metadata = stored?.pageUrl === metadataPageUrl && stored.extractorVersion === 2 ? stored : null;
   if (!metadata) metadata = await chrome.tabs.sendMessage(selectedTab, { type: 'read-replay-metadata' }, { frameId: 0 }).catch(() => null);
+  if (metadata?.extractorVersion !== 2) metadata = null;
   if (!metadataEdited && metadata?.pageUrl === metadataPageUrl) {
     $('liveDate').value = BerrizReplayInfo.dateOnly(metadata.date);
     $('liveArtist').value = metadata.artist || '';

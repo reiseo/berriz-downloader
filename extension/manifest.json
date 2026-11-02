@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
-  "name": "BERRIZ DOWNLOADER",
-  "version": "2.1.0",
+  "name": "Berriz Downloader",
+  "version": "2.1.1",
   "description": "Berriz 영상·오디오 스트림을 찾아 원본 화질의 TS 파일로 저장합니다.",
   "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA2LHbp7ot8XsbYiKEM0NvtbwW4Tx23LqYs2+26qK9Xk3RnAWOQUtUGruG0hty7CWUmrnGuNBOaQ1HVk/dX6snCKJPcETbk8Y8N//jlS2qLvflyAA/S35Dgst4UOLYNLtiagmFAmNqxq31M3s323envh0MbV1dkFGc5VpfDKcAGsiZ5/xyk4aGBA48KMW1iXvq+X8lLTzu6mw+/hCMedZk8T9qgFERinDY7cP/7RoUGrJpjKz/zKXbN1TBfnA9FrG3+7SutDHopb+tADcoORUT1cR9T5mxiAm7v1ZX5mlEunf1LhUg4rej5FVeQN+UIyjLiz5ASkdozeFF1L4HsGLn8QIDAQAB",
   "permissions": [

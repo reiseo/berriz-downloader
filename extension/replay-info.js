@@ -15,7 +15,8 @@
   }
   function titleOnly(value) {
     const text = clean(value).replace(/\s*[|–—-]\s*(?:Berriz|베리즈).*$/i, '').trim();
-    return /^(?:Like Berries|Berriz|베리즈|로그인|로그인이 필요합니다|LIVE|REPLAY|다시보기|라이브)$/i.test(text) || /^Like Berries,? Berriz/i.test(text) ? '' : text;
+    const counter = /^(?:댓글|채팅|실시간\s*채팅|조회수?|좋아요|comments?|live\s*chat|views?|likes?|コメント)\s*(?:[:：]?\s*[\d,.]+\s*(?:개|명)?|[([]\s*[\d,.]+\s*[)\]])?$/i;
+    return counter.test(text) || /^(?:Like Berries|Berriz|베리즈|로그인|로그인이 필요합니다|LIVE|REPLAY|다시보기|라이브)$/i.test(text) || /^Like Berries,? Berriz/i.test(text) ? '' : text;
   }
   function filename(info) {
     const date = dateOnly(info.date);
@@ -37,23 +38,27 @@
       for (const child of Object.values(value)) if (typeof child === 'object') { if (Array.isArray(child)) child.forEach(walk); else walk(child); }
     };
     for (const script of doc.querySelectorAll('script[type="application/ld+json"]')) { try { walk(JSON.parse(script.textContent)); } catch {} }
-    const video = videos.find(v => String(v.url || v.mainEntityOfPage || '').includes(url.pathname)) || videos[0];
-    const headings = [...scope.querySelectorAll('h1,h2,h3')].filter(h => !h.closest('header,nav,[role="navigation"],[role="dialog"]'));
-    const heading = headings.find(h => titleOnly(h.textContent));
-    const title = titleOnly(video?.name) || titleOnly(heading?.textContent) || titleOnly(meta('meta[property="og:title"]')) || titleOnly(doc.title);
-    // Read metadata near the replay heading before considering the rest of the page.
-    let detail = heading?.parentElement;
-    for (let i = 0; detail && i < 4 && !dateOnly(detail.innerText || detail.textContent); i++) detail = detail.parentElement;
-    const region = detail && detail !== doc.body ? detail : scope;
-    const time = region.querySelector('time[datetime]');
+    const video = videos.find(v => String(v.url || v.mainEntityOfPage || '').includes(url.pathname)) || videos.find(v => !v.url && !v.mainEntityOfPage);
+    // Berriz MediaInfo.Title renders a <p>, not h1/h2/h3. The adjacent
+    // MediaInfo.DateTime and ArtistProfile identify its own metadata block.
+    // Source: fan-community-v1.9.25 modules 70251 / 59741 (2026-11-03).
+    const excluded = 'header,nav,[role="navigation"],[role="dialog"],[role="log"],[class*="comment" i],[class*="chat" i]';
+    const dateSelector = '.h-19.f-body-xs-regular.text-GRAY400';
+    const titleNode = [...scope.querySelectorAll('p.f-body-xxl-semibold.text-GRAY002.break-all')].find(node => !node.closest(excluded) && node.parentElement?.querySelector(dateSelector));
+    const region = titleNode?.parentElement;
+    const title = titleOnly(titleNode?.textContent) || titleOnly(video?.name) || titleOnly(meta('meta[property="og:title"]')) || titleOnly(doc.title);
+    const dateNode = region?.querySelector(dateSelector);
+    // Adjacent date/time spans have no separator in textContent. Read each
+    // date element separately before the combined row (e.g. 2026.11.0222:30).
+    const displayedDate = [...(dateNode?.querySelectorAll?.('time,span') || []), dateNode].map(node => dateOnly(node?.textContent)).find(Boolean) || '';
     const broadcasts = [video?.publication].flat().filter(Boolean);
-    const date = dateOnly(broadcasts.find(b => b.startDate)?.startDate) || dateOnly(video?.startDate) || dateOnly(time?.getAttribute('datetime')) || dateOnly(region.innerText || region.textContent) || dateOnly(meta('meta[property="video:release_date"]'));
+    const date = displayedDate || dateOnly(broadcasts.find(b => b.startDate)?.startDate) || dateOnly(video?.startDate) || dateOnly(meta('meta[property="video:release_date"]'));
     const person = [video?.author || video?.creator].flat().filter(Boolean).map(a => typeof a === 'string' ? a : a.name).filter(Boolean).join(' ');
-    const authorNode = [...region.querySelectorAll('[rel="author"], [itemprop="author"], [data-testid*="author" i], [class*="nickname" i], [class*="artistName" i], [class*="artist-name" i], [class*="authorName" i], [class*="author-name" i]')].find(node => !node.closest('[class*="comment" i],[class*="chat" i],[role="log"]'));
-    const author = clean(person || authorNode?.textContent || meta('meta[name="author"]')).slice(0, 80);
+    const authorNode = region?.querySelector('span.f-body-s-medium.text-GRAY002.line-clamp-1.break-all');
+    const author = clean(authorNode?.textContent || person).slice(0, 80);
     const community = decodeURIComponent(url.pathname.split('/').filter(Boolean)[1] || '').replace(/[-_]+/g, ' ').toUpperCase();
     const artist = author && community && !author.toUpperCase().includes(community) ? `${community} ${author}` : author || community;
-    return { pageUrl: url.origin + url.pathname, title: title.slice(0, 180), date, artist: artist.slice(0, 100) };
+    return { extractorVersion: 2, pageUrl: url.origin + url.pathname, title: title.slice(0, 180), date, artist: artist.slice(0, 100) };
   }
   const api = { dateOnly, titleOnly, filename, extract };
   globalThis.BerrizReplayInfo = api;

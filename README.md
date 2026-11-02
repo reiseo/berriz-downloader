@@ -1,10 +1,10 @@
-# BERRIZ DOWNLOADER
+# Berriz Downloader
 
 **Berriz 다시보기를 원본 화질의 영상과 자막으로 저장하는 브라우저 확장 프로그램입니다.**
 
 FFmpeg, yt-dlp, Python, 별도 도우미를 설치할 필요 없이 확장 하나로 사용할 수 있습니다. 분리된 영상과 오디오를 브라우저 안에서 합쳐 `.ts` 파일로 저장합니다.
 
-**[최신 버전 다운로드](https://github.com/reiseo/berriz-downloader/releases/latest)** · [v2.1.0 변경 내용](https://github.com/reiseo/berriz-downloader/releases/tag/v2.1.0)
+**[최신 버전 다운로드](https://github.com/reiseo/berriz-downloader/releases/latest)** · [v2.1.1 변경 내용](https://github.com/reiseo/berriz-downloader/releases/tag/v2.1.1)
 
 ## 주요 기능
 
@@ -22,7 +22,7 @@ FFmpeg, yt-dlp, Python, 별도 도우미를 설치할 필요 없이 확장 하�
 
 Chrome 116 이상에 해당하는 Chromium API를 사용합니다. Chrome·Edge·Whale 계열을 대상으로 하며, 파생 브라우저의 지원 여부는 버전에 따라 달라질 수 있습니다.
 
-1. [Releases](https://github.com/reiseo/berriz-downloader/releases/latest)의 **Assets**에서 `Berriz-Replay-Saver-v2.1.0.zip`을 받습니다. GitHub가 자동 생성한 `Source code`가 아닌 설치용 ZIP을 선택하세요.
+1. [Releases](https://github.com/reiseo/berriz-downloader/releases/latest)의 **Assets**에서 `Berriz-Replay-Saver-v2.1.1.zip`을 받습니다. GitHub가 자동 생성한 `Source code`가 아닌 설치용 ZIP을 선택하세요.
 2. ZIP의 압축을 완전히 풉니다.
 3. 브라우저에서 확장 관리 페이지를 엽니다.
 

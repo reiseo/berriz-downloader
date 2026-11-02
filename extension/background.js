@@ -68,7 +68,7 @@ chrome.runtime.onMessage.addListener((message, sender, reply) => {
       const incoming = message.metadata || {};
       const page = new URL(sender.url);
       if (incoming.pageUrl !== page.origin + page.pathname || !/\/live\/replay\//.test(page.pathname)) throw new Error('현재 다시보기의 정보가 아닙니다.');
-      const metadata = { pageUrl: incoming.pageUrl, title: String(incoming.title || '').slice(0, 180), date: String(incoming.date || '').slice(0, 10), artist: String(incoming.artist || '').slice(0, 100) };
+      const metadata = { extractorVersion: Number(incoming.extractorVersion) || 0, pageUrl: incoming.pageUrl, title: String(incoming.title || '').slice(0, 180), date: String(incoming.date || '').slice(0, 10), artist: String(incoming.artist || '').slice(0, 100) };
       await chrome.storage.session.set({ [`meta:${sender.tab.id}`]: metadata }); return { ok: true };
     })();
   }

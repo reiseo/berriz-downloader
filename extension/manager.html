@@ -1,9 +1,9 @@
 <!doctype html>
 <html lang="ko">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>BERRIZ DOWNLOADER</title><link rel="stylesheet" href="manager.css"><link rel="stylesheet" href="subtitles.css"><link rel="stylesheet" href="popup.css"></head>
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Berriz Downloader</title><link rel="stylesheet" href="manager.css"><link rel="stylesheet" href="subtitles.css"><link rel="stylesheet" href="popup.css"></head>
 <body>
 <main>
-  <header><span class="brand">B</span><div><h1>BERRIZ DOWNLOADER</h1></div></header>
+  <header><span class="brand">B</span><div><h1>Berriz Downloader</h1></div></header>
   <section class="card">
     <div class="section-heading"><h2>재생 중인 스트림</h2><button id="refresh" class="subtle">목록 새로고침</button></div>
     <label for="source">Berriz 탭</label><select id="source"><option value="">열린 Berriz 탭 없음</option></select>
@@ -30,6 +30,6 @@
     <div class="row"><button id="subtitlesOnly" class="secondary" disabled>선택한 자막만 다운로드</button><span class="muted">위의 TS 다운로드를 누르면 선택한 자막도 함께 받습니다.</span></div>
   </section>
   <section class="card status-card" hidden><div class="section-heading"><h2 id="status" role="status">브라우저 엔진 준비 중…</h2><span id="percent"></span></div><progress id="progress" max="100" value="0"></progress><div class="metrics"><div><small>다운로드 속도</small><strong id="rate">—</strong></div><div><small>예상 남은 시간</small><strong id="eta">—</strong></div><div><small>받은 용량 / 예상 전체</small><strong id="size">—</strong></div><div><small>경과 시간</small><strong id="elapsed">—</strong></div></div><p id="stats" class="muted">대기 중</p><p class="muted">전체 용량·남은 시간은 추정치입니다. 마지막 파일 저장과 자막 처리 시간은 별도입니다.</p><p id="path" class="filepath"></p><div id="savedSubtitles" class="filepath"></div><div id="warnings"></div></section>
-  <footer>v2.1.0 · FFmpeg·도우미 설치 없이 확장만으로 저장합니다.<br>팝업을 닫아도 계속 진행됩니다. 완료될 때까지 브라우저를 켜 두세요.<br>종료된 H.264/AAC TS 다시보기를 지원합니다.</footer>
+  <footer>v2.1.1 · FFmpeg·도우미 설치 없이 확장만으로 저장합니다.<br>팝업을 닫아도 계속 진행됩니다. 완료될 때까지 브라우저를 켜 두세요.<br>종료된 H.264/AAC TS 다시보기를 지원합니다.</footer>
 </main><script src="replay-info.js"></script><script src="manager.js"></script>
 </body></html>
